@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { SongCard } from "../components/SongCard";
+import { SongCard } from "@/components/SongCard";
 import { getPopularSongs } from "../data/mockSongs";
 import { Skeleton } from "@/components/ui/skeleton";
 

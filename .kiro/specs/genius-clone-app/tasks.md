@@ -41,7 +41,7 @@
   - Handle invalid song IDs with 404 pages
   - _Requirements: 3.1, 6.4, 5.1_
 
-- [x] 4.2 Build LyricsViewer component with annotation support
+- [x] 4.2 Build LyricsViewer component with annotation supportP
 
   - Create LyricsViewer component to display lyrics line by line
   - Implement hover highlighting for annotated text sections
@@ -58,7 +58,7 @@
   - Handle responsive positioning for mobile devices
   - _Requirements: 3.4, 3.5, 7.3, 7.4, 7.5_
 
-- [-] 5. Integrate annotation system with state management
+- [x] 5. Integrate annotation system with state management
 
   - Implement React state management for annotation interactions
   - Connect LyricsViewer with AnnotationPopup component

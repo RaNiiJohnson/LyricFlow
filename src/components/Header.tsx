@@ -3,17 +3,17 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Search, Menu, Music } from "lucide-react";
-import { Button } from "../src/components/ui/button";
-import { Input } from "../src/components/ui/input";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "../src/components/ui/sheet";
-import { mockSongs } from "../data/mockSongs";
-import { Song } from "../src/lib/types/song";
+} from "./ui/sheet";
+import { mockSongs } from "../../data/mockSongs";
+import { Song } from "../lib/types/song";
 
 interface HeaderProps {
   className?: string;
@@ -60,7 +60,7 @@ export function Header({ className }: HeaderProps) {
         >
           <Music className="h-8 w-8 text-accent-gold" />
           <span className="text-xl font-bold text-foreground">
-            Genius<span className="text-accent-gold">Clone</span>
+            Lyric<span className="text-accent-gold">Flow</span>
           </span>
         </Link>
 

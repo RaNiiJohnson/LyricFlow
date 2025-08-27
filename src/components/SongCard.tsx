@@ -4,9 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Music, Play } from "lucide-react";
-import { Card, CardContent } from "../src/components/ui/card";
-import { Badge } from "../src/components/ui/badge";
-import { Song } from "../src/lib/types/song";
+import { Card, CardContent } from "./ui/card";
+import { Badge } from "./ui/badge";
+import { Song } from "../lib/types/song";
 
 interface SongCardProps {
   song: Song;

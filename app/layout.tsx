@@ -1,4 +1,4 @@
-import Header from "@/components/header";
+import { Header } from "@/components/Header";
 import Footer from "@/components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
@@ -34,7 +34,7 @@ export default function RootLayout({
         >
           <div className="flex flex-col min-h-screen w-full mx-auto">
             <Header />
-            <main className="flex-1">{children}</main>
+            <main className="flex-1 pt-16">{children}</main>
             <Footer />
           </div>
           <Toaster />

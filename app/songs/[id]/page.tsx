@@ -2,10 +2,11 @@
 
 import { notFound } from "next/navigation";
 import { getSongById } from "../../../data/mockSongs";
-import { Song, Annotation } from "../../../src/lib/types/song";
-import LyricsViewer from "../../../components/LyricsViewer";
-import AnnotationPopup from "../../../components/AnnotationPopup";
-import { use, useState, useEffect, useCallback } from "react";
+import { Song } from "@/lib/types/song";
+import LyricsViewer from "@/components/LyricsViewer";
+import AnnotationPopup from "@/components/AnnotationPopup";
+import { useAnnotationState } from "@/hooks/useAnnotationState";
+import { use } from "react";
 
 interface SongPageProps {
   params: Promise<{ id: string }>;
@@ -14,16 +15,13 @@ interface SongPageProps {
 export default function SongPage({ params }: SongPageProps) {
   const { id } = use(params);
 
-  // State for annotation popup with enhanced management
-  const [selectedAnnotation, setSelectedAnnotation] =
-    useState<Annotation | null>(null);
-  const [popupPosition, setPopupPosition] = useState<{ x: number; y: number }>({
-    x: 0,
-    y: 0,
-  });
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [isPopupLoading, setIsPopupLoading] = useState(false);
-  const [lyricsLoaded, setLyricsLoaded] = useState(false);
+  // Use custom hook for annotation state management
+  const {
+    state: annotationState,
+    handleAnnotationClick,
+    handlePopupClose,
+    handleAnnotationHover,
+  } = useAnnotationState();
 
   // Fetch song data based on ID
   const song: Song | undefined = getSongById(id);
@@ -32,67 +30,6 @@ export default function SongPage({ params }: SongPageProps) {
   if (!song) {
     notFound();
   }
-
-  // Simulate lyrics loading for smooth UX
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLyricsLoaded(true);
-    }, 300);
-
-    return () => clearTimeout(timer);
-  }, [id]);
-
-  // Enhanced annotation click handler with loading state
-  const handleAnnotationClick = useCallback(
-    (annotation: Annotation, position: { x: number; y: number }) => {
-      // Close any existing popup first
-      if (isPopupOpen) {
-        setIsPopupOpen(false);
-        setSelectedAnnotation(null);
-      }
-
-      // Add slight delay for smooth transition
-      setTimeout(
-        () => {
-          setIsPopupLoading(true);
-          setPopupPosition(position);
-
-          // Simulate loading annotation content
-          setTimeout(() => {
-            setSelectedAnnotation(annotation);
-            setIsPopupLoading(false);
-            setIsPopupOpen(true);
-          }, 150);
-        },
-        isPopupOpen ? 200 : 0
-      );
-    },
-    [isPopupOpen]
-  );
-
-  // Enhanced popup close handler
-  const handlePopupClose = useCallback(() => {
-    setIsPopupOpen(false);
-    // Clear annotation after animation completes
-    setTimeout(() => {
-      setSelectedAnnotation(null);
-      setIsPopupLoading(false);
-    }, 200);
-  }, []);
-
-  // Handle escape key globally
-  useEffect(() => {
-    const handleEscapeKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && isPopupOpen) {
-        handlePopupClose();
-      }
-    };
-
-    document.addEventListener("keydown", handleEscapeKey);
-    return () => {
-      document.removeEventListener("keydown", handleEscapeKey);
-    };
-  }, [isPopupOpen, handlePopupClose]);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -135,40 +72,27 @@ export default function SongPage({ params }: SongPageProps) {
         </div>
 
         {/* Lyrics Section with Annotations */}
-        {lyricsLoaded ? (
-          <LyricsViewer
-            lyrics={song.lyrics}
-            annotations={song.annotations}
-            onAnnotationClick={handleAnnotationClick}
-          />
-        ) : (
-          <div className="bg-card rounded-lg p-6">
-            <h3 className="text-2xl font-semibold mb-6">Lyrics</h3>
-            <div className="space-y-4">
-              {/* Loading skeleton for lyrics */}
-              {Array.from({ length: 6 }).map((_, index) => (
-                <div
-                  key={index}
-                  className="flex items-center space-x-4 p-2 animate-pulse"
-                >
-                  <div className="w-8 h-4 bg-muted rounded"></div>
-                  <div className="flex-1 space-y-2">
-                    <div className="h-4 bg-muted rounded w-3/4"></div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+        <LyricsViewer
+          lyrics={song.lyrics}
+          annotations={song.annotations}
+          onAnnotationClick={handleAnnotationClick}
+          onAnnotationHover={handleAnnotationHover}
+          hoveredAnnotation={annotationState.hoveredAnnotation}
+          isInteracting={annotationState.isInteracting}
+        />
 
         {/* Enhanced Annotation Popup with loading state */}
-        {(isPopupOpen || isPopupLoading) && (
+        {(annotationState.isPopupOpen || annotationState.isPopupLoading) && (
           <AnnotationPopup
-            annotation={isPopupLoading ? null : selectedAnnotation}
-            position={popupPosition}
+            annotation={
+              annotationState.isPopupLoading
+                ? null
+                : annotationState.selectedAnnotation
+            }
+            position={annotationState.popupPosition}
             onClose={handlePopupClose}
-            isOpen={isPopupOpen}
-            isLoading={isPopupLoading}
+            isOpen={annotationState.isPopupOpen}
+            isLoading={annotationState.isPopupLoading}
           />
         )}
       </div>

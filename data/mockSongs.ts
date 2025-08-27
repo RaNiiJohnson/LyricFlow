@@ -3,46 +3,239 @@ import { Song } from "../src/lib/types/song";
 export const mockSongs: Song[] = [
   {
     id: "1",
+    title: "Golden",
+    artist: "KATSEYE",
+    album: "SIS (Soft Is Strong)",
+    thumbnailUrl:
+      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop",
+    releaseDate: "2024-08-16",
+    genre: "K-Pop",
+    lyrics: [
+      {
+        id: "section-1",
+        text: "Verse 1: Rumi, Zoey, Mira, All",
+        lineNumber: 1,
+        isSection: true,
+      },
+      {
+        id: "line-1",
+        text: "I was a ghost, I was alone",
+        lineNumber: 2,
+        annotations: ["ann-1"],
+      },
+      {
+        id: "line-2",
+        text: "Eoduwojin apgilsoge (Hah)",
+        lineNumber: 3,
+      },
+      {
+        id: "line-3",
+        text: "Given the throne, I didn't know how to believe (Hah)",
+        lineNumber: 4,
+        annotations: ["ann-2"],
+      },
+      {
+        id: "line-4",
+        text: "I was the queen that I'm meant to be (Ah)",
+        lineNumber: 5,
+      },
+      {
+        id: "line-5",
+        text: "I lived two lives, tried to play both sides",
+        lineNumber: 6,
+      },
+      {
+        id: "line-6",
+        text: "But I couldn't find my own place (Oh, oh)",
+        lineNumber: 7,
+      },
+      {
+        id: "line-7",
+        text: "Called a problem child, 'cause I got too wild",
+        lineNumber: 8,
+        annotations: ["ann-3"],
+      },
+      {
+        id: "line-8",
+        text: "But now that's how I'm getting paid, kkeuteopsi on stage",
+        lineNumber: 9,
+      },
+      {
+        id: "section-2",
+        text: "Pre-Chorus: Rumi, All",
+        lineNumber: 10,
+        isSection: true,
+      },
+      {
+        id: "line-9",
+        text: "I'm done hidin', now I'm shinin'",
+        lineNumber: 11,
+      },
+      {
+        id: "line-10",
+        text: "Like I'm born to be",
+        lineNumber: 12,
+      },
+      {
+        id: "line-11",
+        text: "We dreamin' hard, we came so far",
+        lineNumber: 13,
+      },
+      {
+        id: "line-12",
+        text: "Now I believe",
+        lineNumber: 14,
+      },
+      {
+        id: "section-3",
+        text: "Chorus: Rumi, All",
+        lineNumber: 15,
+        isSection: true,
+      },
+      {
+        id: "line-13",
+        text: "We're goin' up, up, up",
+        lineNumber: 16,
+        annotations: ["ann-4"],
+      },
+      {
+        id: "line-14",
+        text: "It's our moment",
+        lineNumber: 17,
+      },
+      {
+        id: "line-15",
+        text: "You know together we're glowing",
+        lineNumber: 18,
+      },
+      {
+        id: "line-16",
+        text: "Gonna be, gonna be golden",
+        lineNumber: 19,
+        annotations: ["ann-5"],
+      },
+      {
+        id: "line-17",
+        text: "Oh, up, up, up",
+        lineNumber: 20,
+      },
+      {
+        id: "line-18",
+        text: "With our voices",
+        lineNumber: 21,
+      },
+      {
+        id: "line-19",
+        text: "Yeongwonhi kkaejil su eomneun",
+        lineNumber: 22,
+      },
+      {
+        id: "line-20",
+        text: "Gonna be, gonna be golden",
+        lineNumber: 23,
+      },
+    ],
+    annotations: [
+      {
+        id: "ann-1",
+        lyricLineId: "line-1",
+        startIndex: 0,
+        endIndex: 29,
+        content:
+          "The opening line establishes the protagonist's past state of isolation and invisibility.",
+        author: "K-Pop Analyst",
+        createdAt: "2024-08-20T10:30:00Z",
+      },
+      {
+        id: "ann-2",
+        lyricLineId: "line-3",
+        startIndex: 0,
+        endIndex: 47,
+        content:
+          "References being given power or responsibility but lacking the confidence to embrace it.",
+        author: "Music Scholar",
+        createdAt: "2024-08-20T11:00:00Z",
+      },
+      {
+        id: "ann-3",
+        lyricLineId: "line-7",
+        startIndex: 0,
+        endIndex: 44,
+        content:
+          "Reclaiming the 'problem child' label as a source of strength and authenticity.",
+        author: "Cultural Critic",
+        createdAt: "2024-08-20T11:30:00Z",
+      },
+      {
+        id: "ann-4",
+        lyricLineId: "line-13",
+        startIndex: 0,
+        endIndex: 21,
+        content:
+          "The repetitive 'up, up, up' emphasizes the ascending journey and momentum of growth.",
+        author: "Lyric Expert",
+        createdAt: "2024-08-20T12:00:00Z",
+      },
+      {
+        id: "ann-5",
+        lyricLineId: "line-16",
+        startIndex: 0,
+        endIndex: 26,
+        content:
+          "The central metaphor of becoming 'golden' represents achieving one's full potential and worth.",
+        author: "Pop Music Critic",
+        createdAt: "2024-08-20T12:30:00Z",
+      },
+    ],
+  },
+  {
+    id: "2",
     title: "Bohemian Rhapsody",
     artist: "Queen",
     album: "A Night at the Opera",
     thumbnailUrl:
-      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop",
     releaseDate: "1975-10-31",
     genre: "Rock",
     lyrics: [
       {
+        id: "section-1",
+        text: "Verse 1",
+        lineNumber: 1,
+        isSection: true,
+      },
+      {
         id: "line-1",
         text: "Is this the real life?",
-        lineNumber: 1,
+        lineNumber: 2,
         annotations: ["ann-1"],
       },
       {
         id: "line-2",
         text: "Is this just fantasy?",
-        lineNumber: 2,
+        lineNumber: 3,
         annotations: ["ann-2"],
       },
       {
         id: "line-3",
         text: "Caught in a landslide",
-        lineNumber: 3,
+        lineNumber: 4,
         annotations: ["ann-3"],
       },
       {
         id: "line-4",
         text: "No escape from reality",
-        lineNumber: 4,
+        lineNumber: 5,
       },
       {
         id: "line-5",
         text: "Open your eyes",
-        lineNumber: 5,
+        lineNumber: 6,
       },
       {
         id: "line-6",
         text: "Look up to the skies and see",
-        lineNumber: 6,
+        lineNumber: 7,
       },
     ],
     annotations: [
