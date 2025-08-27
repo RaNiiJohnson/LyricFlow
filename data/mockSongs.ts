@@ -272,7 +272,7 @@ export const mockSongs: Song[] = [
     ],
   },
   {
-    id: "2",
+    id: "22",
     title: "Imagine",
     artist: "John Lennon",
     album: "Imagine",
@@ -567,4 +567,22 @@ export const getSongById = (id: string): Song | undefined => {
 // Helper function to get popular songs (for homepage)
 export const getPopularSongs = (): Song[] => {
   return mockSongs;
+};
+
+// Async version for server-side data fetching
+export const getPopularSongsAsync = async (): Promise<Song[]> => {
+  // Simulate async data fetching (in real app, this would be a database call)
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(mockSongs), 0);
+  });
+};
+
+// Async version for getting song by ID
+export const getSongByIdAsync = async (
+  id: string
+): Promise<Song | undefined> => {
+  // Simulate async data fetching (in real app, this would be a database call)
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(mockSongs.find((song) => song.id === id)), 0);
+  });
 };

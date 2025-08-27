@@ -1,14 +1,10 @@
-"use client";
-
 import { notFound } from "next/navigation";
-import { getSongById } from "../../../data/mockSongs";
+import { getSongByIdAsync } from "../../../data/mockSongs";
 import { Song } from "@/lib/types/song";
-import LyricsViewer from "@/components/LyricsViewer";
-import AnnotationPopup from "@/components/AnnotationPopup";
-import { useAnnotationState } from "@/hooks/useAnnotationState";
-import { use, Suspense } from "react";
+import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import Image from "next/image";
+import SongLyricsClient from "@/components/SongLyricsClient";
 
 interface SongPageProps {
   params: Promise<{ id: string }>;
@@ -42,21 +38,11 @@ function LyricsViewerSkeleton() {
   );
 }
 
-export default function SongPage({ params }: SongPageProps) {
-  const { id } = use(params);
+export default async function SongPage({ params }: SongPageProps) {
+  const { id } = await params;
 
-  // Use custom hook for annotation state management
-  const {
-    state: annotationState,
-    handleAnnotationClick,
-    handlePopupClose,
-    handleAnnotationHover,
-  } = useAnnotationState();
+  const song: Song | undefined = await getSongByIdAsync(id);
 
-  // Fetch song data based on ID
-  const song: Song | undefined = getSongById(id);
-
-  // Handle invalid song IDs with 404
   if (!song) {
     notFound();
   }
@@ -64,7 +50,7 @@ export default function SongPage({ params }: SongPageProps) {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <div className="container mx-auto px-4 py-8">
-        {/* Song Header */}
+        {/* Song Header - Static Server Component */}
         <div className="mb-8">
           <div className="flex flex-col md:flex-row gap-6 items-start">
             <div className="relative w-64 h-64 rounded-lg overflow-hidden shadow-lg">
@@ -108,34 +94,13 @@ export default function SongPage({ params }: SongPageProps) {
           </div>
         </div>
 
-        {/* Lyrics Section with Annotations */}
+        {/* Interactive Lyrics Section - Client Component */}
         <Suspense fallback={<LyricsViewerSkeleton />}>
-          <LyricsViewer
+          <SongLyricsClient
             lyrics={song.lyrics}
             annotations={song.annotations}
-            onAnnotationClick={handleAnnotationClick}
-            onAnnotationHover={handleAnnotationHover}
-            hoveredAnnotation={annotationState.hoveredAnnotation}
-            isInteracting={annotationState.isInteracting}
           />
         </Suspense>
-
-        {/* Enhanced Annotation Popup with loading state */}
-        {(annotationState.isPopupOpen || annotationState.isPopupLoading) && (
-          <Suspense fallback={null}>
-            <AnnotationPopup
-              annotation={
-                annotationState.isPopupLoading
-                  ? null
-                  : annotationState.selectedAnnotation
-              }
-              position={annotationState.popupPosition}
-              onClose={handlePopupClose}
-              isOpen={annotationState.isPopupOpen}
-              isLoading={annotationState.isPopupLoading}
-            />
-          </Suspense>
-        )}
       </div>
     </div>
   );

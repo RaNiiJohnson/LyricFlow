@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { SongCard } from "@/components/SongCard";
-import { getPopularSongs } from "../data/mockSongs";
+import { getPopularSongsAsync } from "../data/mockSongs";
 import { Skeleton } from "@/components/ui/skeleton";
 
 // Loading component for the song grid
@@ -21,10 +21,10 @@ function SongGridSkeleton() {
   );
 }
 
-// Main song grid component
-function SongGrid() {
+// Main song grid component - Server Component
+async function SongGrid() {
   try {
-    const popularSongs = getPopularSongs();
+    const popularSongs = await getPopularSongsAsync();
 
     if (!popularSongs || popularSongs.length === 0) {
       return (
@@ -67,7 +67,10 @@ function SongGrid() {
   }
 }
 
-export default function Home() {
+export default async function Home() {
+  // Server-side data fetching for song count
+  const popularSongs = await getPopularSongsAsync();
+
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Hero Section */}
@@ -89,7 +92,7 @@ export default function Home() {
             Popular Songs
           </h2>
           <div className="text-sm text-muted-foreground">
-            {getPopularSongs().length} songs available
+            {popularSongs.length} songs available
           </div>
         </div>
 

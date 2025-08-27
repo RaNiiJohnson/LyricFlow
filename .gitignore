@@ -47,3 +47,5 @@ next-env.d.ts
 /app/dragndropp
 
 .kiro
+
+SERVER_COMPONENT_OPTIMIZATIONS.md
