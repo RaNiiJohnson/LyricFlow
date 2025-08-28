@@ -3,7 +3,7 @@ import { Genre } from "../src/lib/types/genre";
 export const mockGenres: Genre[] = [
   {
     id: "genre-1",
-    name: "K-Pop",
+    name: "Jazz",
     description:
       "Korean popular music characterized by catchy melodies, synchronized choreography, and high production values.",
     imageUrl:

@@ -451,3 +451,28 @@ html::-webkit-scrollbar {
     padding-right: max(1rem, env(safe-area-inset-right));
   }
 }
+
+/* Pinterest-style masonry gallery */
+.masonry-gallery {
+  column-fill: balance;
+}
+
+.masonry-item {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* Smooth transitions for masonry items */
+.masonry-item img {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.masonry-item:hover img {
+  transform: scale(1.02);
+}
+
+/* Modal backdrop blur effect */
+.modal-backdrop {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}

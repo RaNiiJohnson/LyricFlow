@@ -24,59 +24,30 @@ model User {
   updatedAt     DateTime
   sessions      Session[]
   accounts      Account[]
-  boards        Board[]
 
   members     Member[]
   invitations Invitation[]
+
+  // Lyrics app relations
+  favoriteSongs UserFavoriteSong[]
+  playlists     Playlist[]
 
   @@unique([email])
   @@map("user")
 }
 
-model Board {
-  id             String        @id @default(cuid())
-  title          String
-  columns        Column[]
-  createdAt      DateTime      @default(now())
-  userId         String?
-  user           User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  organizationId String?
-  organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-}
-
-
-model Column {
-  id       String @id @default(cuid())
-  title    String
-  board    Board  @relation(fields: [boardId], references: [id], onDelete: Cascade)
-  boardId  String
-  tasks    Task[]
-  position Int
-}
-
-model Task {
-  id        String   @id @default(cuid())
-  content   String
-  column    Column   @relation(fields: [columnId], references: [id], onDelete: Cascade)
-  columnId  String
-  position  Int
-  createdAt DateTime @default(now())
-}
-
 model Organization {
-  id          String       @id 
+  id          String       @id
   name        String
   slug        String?
   logo        String?
-  createdAt   DateTime @default(now())
+  createdAt   DateTime     @default(now())
   metadata    String?
   members     Member[]
   invitations Invitation[]
 
   @@unique([slug])
   @@map("organization")
-  Board Board[]
 }
 
 model Member {
@@ -86,7 +57,7 @@ model Member {
   userId         String
   user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   role           String
-  createdAt      DateTime @default(now())
+  createdAt      DateTime     @default(now())
 
   @@map("member")
 }
@@ -98,9 +69,9 @@ model Invitation {
   email          String
   role           String?
   status         String
-  expiresAt      DateTime 
+  expiresAt      DateTime
   inviterId      String
-  check          Boolean @default(false)
+  check          Boolean      @default(false)
   user           User         @relation(fields: [inviterId], references: [id], onDelete: Cascade)
 
   @@map("invitation")
@@ -110,7 +81,7 @@ model Session {
   id        String   @id
   expiresAt DateTime
   token     String
-  createdAt DateTime 
+  createdAt DateTime
   updatedAt DateTime
   ipAddress String?
   userAgent String?
@@ -151,4 +122,155 @@ model Verification {
   updatedAt  DateTime?
 
   @@map("verification")
+}
+
+// === LYRICS APPLICATION MODELS ===
+
+model Artist {
+  id        String   @id @default(cuid())
+  name      String
+  bio       String?
+  imageUrl  String?
+  spotifyId String?
+  verified  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  songs  Song[]
+  albums Album[]
+
+  @@unique([spotifyId])
+  @@map("artist")
+}
+
+model Album {
+  id          String    @id @default(cuid())
+  title       String
+  coverUrl    String?
+  releaseDate DateTime?
+  spotifyId   String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Relations
+  artistId String
+  artist   Artist @relation(fields: [artistId], references: [id], onDelete: Cascade)
+  songs    Song[]
+
+  @@unique([spotifyId])
+  @@map("album")
+}
+
+model Song {
+  id           String    @id @default(cuid())
+  title        String
+  duration     Int? // in seconds
+  trackNumber  Int?
+  thumbnailUrl String?
+  youtubeId    String?
+  releaseDate  DateTime?
+  genre        String?
+  isExplicit   Boolean   @default(false)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  // Relations
+  artistId String
+  artist   Artist @relation(fields: [artistId], references: [id], onDelete: Cascade)
+
+  albumId String?
+  album   Album?  @relation(fields: [albumId], references: [id], onDelete: SetNull)
+
+  lyrics        Lyric[]
+  annotations   Annotation[]
+  favorites     UserFavoriteSong[]
+  playlistSongs PlaylistSong[]
+
+  @@unique([youtubeId])
+  @@map("song")
+}
+
+model Lyric {
+  id        String   @id @default(cuid())
+  content   String   @db.Text
+  section   String? // verse, chorus, bridge, outro, etc.
+  order     Int
+  startTime Int? // in milliseconds for sync
+  endTime   Int? // in milliseconds for sync
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  songId String
+  song   Song   @relation(fields: [songId], references: [id], onDelete: Cascade)
+
+  @@map("lyric")
+}
+
+model Annotation {
+  id         String   @id @default(cuid())
+  content    String   @db.Text
+  startIndex Int // character position in lyrics
+  endIndex   Int // character position in lyrics
+  verified   Boolean  @default(false)
+  upvotes    Int      @default(0)
+  downvotes  Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // Relations
+  songId String
+  song   Song   @relation(fields: [songId], references: [id], onDelete: Cascade)
+
+  @@map("annotation")
+}
+
+model Playlist {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  isPublic    Boolean  @default(false)
+  coverUrl    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  songs PlaylistSong[]
+
+  @@map("playlist")
+}
+
+model PlaylistSong {
+  id      String   @id @default(cuid())
+  order   Int
+  addedAt DateTime @default(now())
+
+  // Relations
+  playlistId String
+  playlist   Playlist @relation(fields: [playlistId], references: [id], onDelete: Cascade)
+
+  songId String
+  song   Song   @relation(fields: [songId], references: [id], onDelete: Cascade)
+
+  @@unique([playlistId, songId])
+  @@map("playlist_song")
+}
+
+model UserFavoriteSong {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  // Relations
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  songId String
+  song   Song   @relation(fields: [songId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, songId])
+  @@map("user_favorite_song")
 }

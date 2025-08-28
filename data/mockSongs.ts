@@ -2,6 +2,180 @@ import { Song } from "../src/lib/types/song";
 
 export const mockSongs: Song[] = [
   {
+    id: "70",
+    title: "POWER",
+    artist: "Kevs",
+    album: "FEAR",
+    thumbnailUrl: "/images/kevs.png",
+    releaseDate: "31 Jul 2025 ",
+    genre: "RnB",
+    lyrics: [
+      {
+        id: "section-1",
+        text: "Refrain",
+        lineNumber: 1,
+        isSection: true,
+      },
+      {
+        id: "line-1",
+        text: "I Got that power mahatonga anao lasa saina",
+        lineNumber: 2,
+        annotations: ["ann-1"],
+      },
+      {
+        id: "line-2",
+        text: "Ny olona mora miova iriko ianao mba tsy ho anisany",
+        lineNumber: 3,
+      },
+      {
+        id: "line-3",
+        text: "Nampadiso fanantenana anah tsy afaka isaina",
+        lineNumber: 4,
+      },
+      {
+        id: "line-4",
+        text: "Mandeha irery tsy mitaraina , Alatsinainy atr@weekend",
+        lineNumber: 5,
+      },
+      {
+        id: "line-5",
+        text: "Hmmm , misy zavatra tsy azoko efa miezaka mitsoka mbola tratrany fomba ratsiko",
+        lineNumber: 6,
+      },
+      {
+        id: "line-6",
+        text: "Hmmm , azafady ra hoe nandratra / indraindray tsy ianao ilay diso fa ilay mibaiko anatiko",
+        lineNumber: 7,
+      },
+      {
+        id: "section-2",
+        text: "Couplet 1",
+        lineNumber: 10,
+        isSection: true,
+      },
+      {
+        id: "line-9",
+        text: "Izay napitambatra no manasaraka antsika tsy hiray ihany",
+        lineNumber: 11,
+      },
+      {
+        id: "line-10",
+        text: "Ny hiafarantsika sy ianao ho fatin’ny love sy ny pride",
+        lineNumber: 12,
+      },
+      {
+        id: "line-11",
+        text: "We dreamin' hard, we came so far",
+        lineNumber: 13,
+      },
+      {
+        id: "line-12",
+        text: "Now I believe",
+        lineNumber: 14,
+      },
+      {
+        id: "section-3",
+        text: "Chorus: Rumi, All",
+        lineNumber: 15,
+        isSection: true,
+      },
+      {
+        id: "line-13",
+        text: "We're goin' up, up, up",
+        lineNumber: 16,
+        annotations: ["ann-4"],
+      },
+      {
+        id: "line-14",
+        text: "It's our moment",
+        lineNumber: 17,
+      },
+      {
+        id: "line-15",
+        text: "You know together we're glowing",
+        lineNumber: 18,
+      },
+      {
+        id: "line-16",
+        text: "Gonna be, gonna be golden",
+        lineNumber: 19,
+        annotations: ["ann-5"],
+      },
+      {
+        id: "line-17",
+        text: "Oh, up, up, up",
+        lineNumber: 20,
+      },
+      {
+        id: "line-18",
+        text: "With our voices",
+        lineNumber: 21,
+      },
+      {
+        id: "line-19",
+        text: "Yeongwonhi kkaejil su eomneun",
+        lineNumber: 22,
+      },
+      {
+        id: "line-20",
+        text: "Gonna be, gonna be golden",
+        lineNumber: 23,
+      },
+    ],
+    annotations: [
+      {
+        id: "ann-1",
+        lyricLineId: "line-1",
+        startIndex: 0,
+        endIndex: 29,
+        content:
+          "The opening line establishes the protagonist's past state of isolation and invisibility.",
+        author: "Jazz Analyst",
+        createdAt: "2024-08-20T10:30:00Z",
+      },
+      {
+        id: "ann-2",
+        lyricLineId: "line-3",
+        startIndex: 0,
+        endIndex: 47,
+        content:
+          "References being given power or responsibility but lacking the confidence to embrace it.",
+        author: "Music Scholar",
+        createdAt: "2024-08-20T11:00:00Z",
+      },
+      {
+        id: "ann-3",
+        lyricLineId: "line-7",
+        startIndex: 0,
+        endIndex: 44,
+        content:
+          "Reclaiming the 'problem child' label as a source of strength and authenticity.",
+        author: "Cultural Critic",
+        createdAt: "2024-08-20T11:30:00Z",
+      },
+      {
+        id: "ann-4",
+        lyricLineId: "line-13",
+        startIndex: 0,
+        endIndex: 21,
+        content:
+          "The repetitive 'up, up, up' emphasizes the ascending journey and momentum of growth.",
+        author: "Lyric Expert",
+        createdAt: "2024-08-20T12:00:00Z",
+      },
+      {
+        id: "ann-5",
+        lyricLineId: "line-16",
+        startIndex: 0,
+        endIndex: 26,
+        content:
+          "The central metaphor of becoming 'golden' represents achieving one's full potential and worth.",
+        author: "Pop Music Critic",
+        createdAt: "2024-08-20T12:30:00Z",
+      },
+    ],
+  },
+  {
     id: "1",
     title: "Golden",
     artist: "KATSEYE",
@@ -9,7 +183,7 @@ export const mockSongs: Song[] = [
     thumbnailUrl:
       "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop",
     releaseDate: "2024-08-16",
-    genre: "K-Pop",
+    genre: "Jazz",
     lyrics: [
       {
         id: "section-1",
@@ -143,7 +317,7 @@ export const mockSongs: Song[] = [
         endIndex: 29,
         content:
           "The opening line establishes the protagonist's past state of isolation and invisibility.",
-        author: "K-Pop Analyst",
+        author: "Jazz Analyst",
         createdAt: "2024-08-20T10:30:00Z",
       },
       {

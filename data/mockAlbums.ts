@@ -2,6 +2,49 @@ import { Album } from "../src/lib/types/album";
 
 export const mockAlbums: Album[] = [
   {
+    id: "album-70",
+    title: "SIS (Soft Is Strong)",
+    artist: "KATSEYE",
+    artistId: "artist-1",
+    coverUrl:
+      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=600&fit=crop",
+    releaseDate: "2024-08-16",
+    genre: "Jazz",
+    description:
+      "The debut EP from global girl group KATSEYE, featuring their breakout hit 'Golden' and showcasing their international appeal.",
+    tracks: [
+      {
+        id: "track-1",
+        trackNumber: 1,
+        title: "Debut",
+        duration: 180,
+        songId: "1-intro",
+      },
+      {
+        id: "track-2",
+        trackNumber: 2,
+        title: "Golden",
+        duration: 195,
+        songId: "1",
+      },
+      {
+        id: "track-3",
+        trackNumber: 3,
+        title: "Touch",
+        duration: 210,
+        songId: "1-touch",
+      },
+      {
+        id: "track-4",
+        trackNumber: 4,
+        title: "My Way",
+        duration: 188,
+        songId: "1-myway",
+      },
+    ],
+    totalDuration: 773,
+  },
+  {
     id: "album-1",
     title: "SIS (Soft Is Strong)",
     artist: "KATSEYE",
@@ -9,7 +52,7 @@ export const mockAlbums: Album[] = [
     coverUrl:
       "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=600&fit=crop",
     releaseDate: "2024-08-16",
-    genre: "K-Pop",
+    genre: "Jazz",
     description:
       "The debut EP from global girl group KATSEYE, featuring their breakout hit 'Golden' and showcasing their international appeal.",
     tracks: [

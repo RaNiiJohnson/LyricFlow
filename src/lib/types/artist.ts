@@ -1,3 +1,12 @@
+export interface ArtistPhoto {
+  id: string;
+  url: string;
+  caption?: string;
+  width: number;
+  height: number;
+  category?: "concert" | "studio" | "portrait" | "behind-scenes" | "event";
+}
+
 export interface Artist {
   id: string;
   name: string;
@@ -14,4 +23,5 @@ export interface Artist {
   };
   albums: string[]; // Album IDs
   songs: string[]; // Song IDs
+  photos?: ArtistPhoto[]; // Galerie de photos style Pinterest
 }

@@ -87,13 +87,13 @@ const LyricsViewer = memo(function LyricsViewer({
         <span
           key={`annotation-${annotation.id}`}
           className={`
-            cursor-pointer transition-all duration-200 rounded-sm px-1 -mx-1
+            cursor-pointer transition-all duration-200 rounded-sm px-1.5 py-0.5
             ${
               isHovered
-                ? "text-accent-gold font-medium"
-                : "hover:text-accent-gold"
+                ? "text-primary font-medium bg-primary/10"
+                : "hover:text-primary hover:bg-primary/5"
             }
-            border-b-2 border-accent-gold border-opacity-50 hover:border-opacity-80
+            border-b-2 border-primary border-opacity-50 hover:border-opacity-80
           `}
           onMouseEnter={() => {
             if (!isInteracting) {
@@ -198,7 +198,7 @@ const LyricsViewer = memo(function LyricsViewer({
             {/* Section Header */}
             {section.title && (
               <div className="mb-4">
-                <h4 className="text-lg font-semibold text-accent-gold bg-accent-gold/10 px-3 py-2 rounded-md inline-block">
+                <h4 className="text-lg font-semibold text-primary bg-primary/10 px-3 py-2 rounded-md inline-block">
                   [{section.title}]
                 </h4>
               </div>

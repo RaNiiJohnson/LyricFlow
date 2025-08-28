@@ -20,8 +20,10 @@ import {
   Instagram,
   Twitter,
   Youtube,
+  Camera,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { ArtistPhotoGallery } from "@/components/ArtistPhotoGallery";
 
 interface ArtistPageProps {
   params: Promise<{ id: string }>;
@@ -266,6 +268,29 @@ export default async function ArtistPage({ params }: ArtistPageProps) {
             </div>
           </div>
         </div>
+
+        {/* Photos Gallery Section */}
+        {artist.photos && artist.photos.length > 0 && (
+          <section className="mb-8 sm:mb-12">
+            <div className="flex items-center justify-between mb-6 sm:mb-8">
+              <div className="flex items-center gap-2">
+                <Camera className="h-5 w-5 text-primary" />
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground">
+                  Photos
+                </h2>
+              </div>
+              <div className="text-xs sm:text-sm text-muted-foreground">
+                {artist.photos.length} photo
+                {artist.photos.length !== 1 ? "s" : ""}
+              </div>
+            </div>
+
+            <ArtistPhotoGallery
+              photos={artist.photos}
+              artistName={artist.name}
+            />
+          </section>
+        )}
 
         {/* Albums Section */}
         {artist.albums.length > 0 && (

@@ -81,8 +81,12 @@ export default async function SongPage({ params }: SongPageProps) {
                 {song.releaseDate && (
                   <p className="text-muted-foreground">
                     Released:{" "}
-                    <span className="text-foreground">
-                      {new Date(song.releaseDate).toLocaleDateString()}
+                    <span className="text-foreground font-medium">
+                      {new Date(song.releaseDate).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
                     </span>
                   </p>
                 )}
