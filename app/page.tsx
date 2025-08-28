@@ -8,26 +8,105 @@ import { getPopularGenresAsync } from "../data/mockGenres";
 import { Skeleton } from "@/components/ui/skeleton";
 import { TrendingUp, Clock, Star, Music } from "lucide-react";
 import Link from "next/link";
+import {
+  ArtistGridSkeleton,
+  GenreGridSkeleton,
+  SongGridSkeleton,
+} from "@/components/SkeletonLoader";
 
-// Loading component for the song grid
-function SongGridSkeleton() {
+export default async function Home() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 sm:gap-6">
-      {Array.from({ length: 8 }).map((_, i) => (
-        <div key={i} className="space-y-3">
-          <Skeleton className="aspect-square w-full rounded-lg" />
-          <div className="space-y-2 px-1">
-            <Skeleton className="h-4 w-3/4" />
-            <Skeleton className="h-3 w-1/2" />
-            <Skeleton className="h-3 w-2/3" />
+    <div className="container mx-auto px-4 py-6 sm:py-8">
+      {/* Hero Section */}
+      <div className="text-center mb-8 sm:mb-12">
+        <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-foreground mb-3 sm:mb-4 leading-tight">
+          Discover Music
+          <span className="text-primary"> Meanings</span>
+        </h1>
+        <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto px-2">
+          Explore song lyrics with interactive annotations and discover the
+          stories behind your favorite music.
+        </p>
+      </div>
+
+      {/* Latest Songs Section */}
+      <section className="mb-8 sm:mb-12">
+        <div className="flex items-center justify-between mb-6 sm:mb-8">
+          <div className="flex items-center gap-2">
+            <Clock className="h-5 w-5 text-primary" />
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground">
+              Latest
+            </h2>
           </div>
+          <Link
+            href="/songs"
+            className="text-xs sm:text-sm text-primary hover:text-primary/80 transition-colors"
+          >
+            View All →
+          </Link>
         </div>
-      ))}
+
+        <Suspense fallback={<SongGridSkeleton />}>
+          <SongGrid />
+        </Suspense>
+      </section>
+
+      {/* Charts and Featured Content */}
+      <div className="grid grid-cols-1 lg:grid-cols-5 xl:grid-cols-7 gap-8 mb-8 sm:mb-12">
+        {/* Charts Section */}
+        <div className="lg:col-span-2 xl:col-span-2">
+          <Suspense fallback={<Skeleton className="h-96 w-full rounded-lg" />}>
+            <ChartsSection />
+          </Suspense>
+        </div>
+
+        {/* Featured Artists */}
+        <div className="lg:col-span-3 xl:col-span-5">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-2">
+              <Star className="h-5 w-5 text-primary" />
+              <h2 className="text-xl sm:text-2xl font-semibold text-foreground">
+                Featured Artists
+              </h2>
+            </div>
+            <Link
+              href="/artists"
+              className="text-xs sm:text-sm text-primary hover:text-primary/80 transition-colors"
+            >
+              View All →
+            </Link>
+          </div>
+          <Suspense fallback={<ArtistGridSkeleton />}>
+            <FeaturedArtists />
+          </Suspense>
+        </div>
+      </div>
+
+      {/* Popular Genres Section */}
+      <section className="mb-8 sm:mb-12">
+        <div className="flex items-center justify-between mb-6 sm:mb-8">
+          <div className="flex items-center gap-2">
+            <Music className="h-5 w-5 text-primary" />
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground">
+              Popular Genres
+            </h2>
+          </div>
+          <Link
+            href="/genres"
+            className="text-xs sm:text-sm text-primary hover:text-primary/80 transition-colors"
+          >
+            View All →
+          </Link>
+        </div>
+
+        <Suspense fallback={<GenreGridSkeleton />}>
+          <PopularGenres />
+        </Suspense>
+      </section>
     </div>
   );
 }
 
-// Main song grid component - Server Component
 async function SongGrid() {
   try {
     const popularSongs = await getPopularSongsAsync();
@@ -71,36 +150,6 @@ async function SongGrid() {
       </div>
     );
   }
-}
-
-// Artist grid skeleton
-function ArtistGridSkeleton() {
-  return (
-    <div className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 sm:gap-6">
-      {Array.from({ length: 4 }).map((_, i) => (
-        <div key={i} className="space-y-3">
-          <Skeleton className="aspect-square w-full rounded-lg" />
-          <div className="space-y-2">
-            <Skeleton className="h-4 w-3/4" />
-            <Skeleton className="h-3 w-1/2" />
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-// Genre grid skeleton
-function GenreGridSkeleton() {
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {Array.from({ length: 6 }).map((_, i) => (
-        <div key={i} className="space-y-3">
-          <Skeleton className="aspect-[16/10] w-full rounded-lg" />
-        </div>
-      ))}
-    </div>
-  );
 }
 
 // Featured Artists Component
@@ -201,104 +250,4 @@ async function ChartsSection() {
       </div>
     );
   }
-}
-
-export default async function Home() {
-  // Server-side data fetching
-  const [popularSongs, artists, genres] = await Promise.all([
-    getPopularSongsAsync(),
-    getAllArtistsAsync(),
-    getPopularGenresAsync(),
-  ]);
-
-  return (
-    <div className="container mx-auto px-4 py-6 sm:py-8">
-      {/* Hero Section */}
-      <div className="text-center mb-8 sm:mb-12">
-        <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-foreground mb-3 sm:mb-4 leading-tight">
-          Discover Music
-          <span className="text-primary"> Meanings</span>
-        </h1>
-        <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto px-2">
-          Explore song lyrics with interactive annotations and discover the
-          stories behind your favorite music.
-        </p>
-      </div>
-
-      {/* Latest Songs Section */}
-      <section className="mb-8 sm:mb-12">
-        <div className="flex items-center justify-between mb-6 sm:mb-8">
-          <div className="flex items-center gap-2">
-            <Clock className="h-5 w-5 text-primary" />
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground">
-              Latest
-            </h2>
-          </div>
-          <Link
-            href="/songs"
-            className="text-xs sm:text-sm text-primary hover:text-primary/80 transition-colors"
-          >
-            View All →
-          </Link>
-        </div>
-
-        <Suspense fallback={<SongGridSkeleton />}>
-          <SongGrid />
-        </Suspense>
-      </section>
-
-      {/* Charts and Featured Content */}
-      <div className="grid grid-cols-1 lg:grid-cols-5 xl:grid-cols-7 gap-8 mb-8 sm:mb-12">
-        {/* Charts Section */}
-        <div className="lg:col-span-2 xl:col-span-2">
-          <Suspense fallback={<Skeleton className="h-96 w-full rounded-lg" />}>
-            <ChartsSection />
-          </Suspense>
-        </div>
-
-        {/* Featured Artists */}
-        <div className="lg:col-span-3 xl:col-span-5">
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-2">
-              <Star className="h-5 w-5 text-primary" />
-              <h2 className="text-xl sm:text-2xl font-semibold text-foreground">
-                Featured Artists
-              </h2>
-            </div>
-            <Link
-              href="/artists"
-              className="text-xs sm:text-sm text-primary hover:text-primary/80 transition-colors"
-            >
-              View All →
-            </Link>
-          </div>
-          <Suspense fallback={<ArtistGridSkeleton />}>
-            <FeaturedArtists />
-          </Suspense>
-        </div>
-      </div>
-
-      {/* Popular Genres Section */}
-      <section className="mb-8 sm:mb-12">
-        <div className="flex items-center justify-between mb-6 sm:mb-8">
-          <div className="flex items-center gap-2">
-            <Music className="h-5 w-5 text-primary" />
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground">
-              Popular Genres
-            </h2>
-          </div>
-          <Link
-            href="/genres"
-            className="text-xs sm:text-sm text-primary hover:text-primary/80 transition-colors"
-          >
-            View All →
-          </Link>
-        </div>
-
-        <Suspense fallback={<GenreGridSkeleton />}>
-          <PopularGenres />
-        </Suspense>
-      </section>
-    </div>
-  );
 }

@@ -18,7 +18,7 @@ export function SongCard({ song, className }: SongCardProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <Link href={`/songs/${song.id}`} className={`block ${className}`}>
+    <Link href={`/lyrics/${song.id}`} className={`block ${className}`}>
       <Card
         className="song-card group overflow-hidden bg-card/50 border-border hover:border-accent-gold/50 transition-all duration-300 ease-in-out cursor-pointer"
         onMouseEnter={() => setIsHovered(true)}

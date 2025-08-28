@@ -13,7 +13,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Genius Clone - Song Lyrics & Annotations",
+  title: "LyricFlow - Song Lyrics",
   description:
     "Discover song lyrics with interactive annotations and meanings behind your favorite music",
 };
