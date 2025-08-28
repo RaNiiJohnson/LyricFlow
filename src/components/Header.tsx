@@ -43,6 +43,7 @@ export function Header({ className }: HeaderProps) {
 
   const navigationItems = [
     { href: "/", label: "Home" },
+    { href: "/songs", label: "Lyrics" },
     { href: "/artists", label: "Artists" },
     { href: "/albums", label: "Albums" },
     { href: "/genres", label: "Genres" },
@@ -58,9 +59,9 @@ export function Header({ className }: HeaderProps) {
           href="/"
           className="flex items-center space-x-2 hover:opacity-80 transition-opacity"
         >
-          <Music className="h-8 w-8 text-accent-gold" />
+          <Music className="h-8 w-8 text-primary" />
           <span className="text-xl font-bold text-foreground">
-            Lyric<span className="text-accent-gold">Flow</span>
+            Lyric<span className="text-primary">Flow</span>
           </span>
         </Link>
 
@@ -88,7 +89,7 @@ export function Header({ className }: HeaderProps) {
               onChange={(e) => handleSearch(e.target.value)}
               onFocus={() => searchQuery && setShowResults(true)}
               onBlur={() => setTimeout(() => setShowResults(false), 200)}
-              className="pl-10 bg-muted/50 border-border focus:border-accent-gold transition-colors"
+              className="pl-10 bg-muted/50 border-border focus:border-primary transition-colors"
             />
           </div>
 
@@ -140,9 +141,9 @@ export function Header({ className }: HeaderProps) {
             <SheetContent side="right" className="w-80">
               <SheetHeader>
                 <SheetTitle className="flex items-center space-x-2">
-                  <Music className="h-6 w-6 text-accent-gold" />
+                  <Music className="h-6 w-6 text-primary" />
                   <span>
-                    Genius<span className="text-accent-gold">Clone</span>
+                    Genius<span className="text-primary">Clone</span>
                   </span>
                 </SheetTitle>
               </SheetHeader>
@@ -156,7 +157,7 @@ export function Header({ className }: HeaderProps) {
                     placeholder="Search songs, artists..."
                     value={searchQuery}
                     onChange={(e) => handleSearch(e.target.value)}
-                    className="pl-10 bg-muted/50 border-border focus:border-accent-gold transition-colors"
+                    className="pl-10 bg-muted/50 border-border focus:border-primary transition-colors"
                   />
                 </div>
 

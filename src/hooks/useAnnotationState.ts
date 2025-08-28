@@ -40,7 +40,7 @@ export function useAnnotationState() {
     }
   }, []);
 
-  // Enhanced annotation click handler with better performance
+  // Enhanced annotation click handler with better performance and mobile support
   const handleAnnotationClick = useCallback(
     (annotation: Annotation, position: { x: number; y: number }) => {
       // Clear any existing timeouts
@@ -65,10 +65,16 @@ export function useAnnotationState() {
       const transitionDelay = state.isPopupOpen ? 200 : 0;
 
       setTimeout(() => {
+        // Adjust position for mobile devices to ensure popup is visible
+        const adjustedPosition = {
+          x: Math.min(position.x, window.innerWidth - 200), // Ensure popup doesn't go off-screen
+          y: Math.max(position.y - 10, 60), // Ensure popup is below header and above touch point
+        };
+
         setState((prev) => ({
           ...prev,
           isPopupLoading: true,
-          popupPosition: position,
+          popupPosition: adjustedPosition,
         }));
 
         // Simulate loading annotation content for smooth UX
@@ -82,13 +88,16 @@ export function useAnnotationState() {
         }, 150);
       }, transitionDelay);
 
-      // Reset interaction state after delay
+      // Reset interaction state after delay (longer for mobile to prevent accidental hovers)
+      const resetDelay = window.matchMedia("(hover: none)").matches
+        ? 1000
+        : 500;
       interactionTimeoutRef.current = setTimeout(() => {
         setState((prev) => ({
           ...prev,
           isInteracting: false,
         }));
-      }, 500);
+      }, resetDelay);
     },
     [state.isPopupOpen, clearAllTimeouts]
   );

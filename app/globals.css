@@ -38,8 +38,6 @@
   --font-sans: Inter, sans-serif;
   --font-serif: Lora, serif;
   --font-mono: IBM Plex Mono, monospace;
-  --accent-gold: #ffd700;
-  --annotation-highlight: rgba(255, 215, 0, 0.3);
   --radius: 1.4rem;
   --shadow-2xs: 0px 2px 3px 0px hsl(0 0% 0% / 0.08);
   --shadow-xs: 0px 2px 3px 0px hsl(0 0% 0% / 0.08);
@@ -94,8 +92,6 @@
   --font-sans: Inter, sans-serif;
   --font-serif: Lora, serif;
   --font-mono: IBM Plex Mono, monospace;
-  --accent-gold: #ffd700;
-  --annotation-highlight: rgba(255, 215, 0, 0.3);
   --radius: 1.4rem;
   --shadow-2xs: 0px 2px 3px 0px hsl(0 0% 0% / 0.08);
   --shadow-xs: 0px 2px 3px 0px hsl(0 0% 0% / 0.08);
@@ -145,9 +141,6 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-
-  --color-accent-gold: var(--accent-gold);
-  --color-annotation-highlight: var(--annotation-highlight);
 
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
@@ -355,21 +348,13 @@ html::-webkit-scrollbar {
 }
 
 /* Genius Clone Custom Styles */
-.accent-gold {
-  color: var(--accent-gold);
-}
-
-.bg-accent-gold {
-  background-color: var(--accent-gold);
-}
-
-.border-accent-gold {
-  border-color: var(--accent-gold);
-}
-
 .annotation-highlight {
-  background-color: var(--annotation-highlight);
+  background-color: hsl(var(--primary) / 0.1);
   transition: background-color 0.2s ease;
+}
+
+.annotation-highlight:hover {
+  background-color: hsl(var(--primary) / 0.15);
 }
 
 .song-card {
@@ -381,6 +366,61 @@ html::-webkit-scrollbar {
   opacity: 0.9;
 }
 
+/* Mobile-specific optimizations */
+@media (max-width: 640px) {
+  .song-card:hover {
+    transform: scale(1.02);
+  }
+
+  /* Improve touch targets */
+  .song-card {
+    min-height: 280px;
+  }
+
+  /* Better text readability on mobile */
+  body {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  /* Prevent zoom on input focus */
+  input[type="text"],
+  input[type="search"],
+  textarea {
+    font-size: 16px;
+  }
+}
+
+/* Touch-specific styles */
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover effects on touch devices */
+  .song-card:hover {
+    transform: none;
+    opacity: 1;
+  }
+
+  /* Enhance active states for touch */
+  .song-card:active {
+    transform: scale(0.98);
+    opacity: 0.9;
+  }
+
+  /* Better touch targets for annotations */
+  .annotation-highlight {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .song-card img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
 .popup-enter {
   opacity: 0;
   transform: scale(0.95);
@@ -390,4 +430,24 @@ html::-webkit-scrollbar {
 .popup-enter-active {
   opacity: 1;
   transform: scale(1);
+}
+
+/* Improved scrolling on mobile */
+@media (max-width: 640px) {
+  .custom-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Safe area handling for devices with notches */
+@supports (padding: max(0px)) {
+  .container {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
 }

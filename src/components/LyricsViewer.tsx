@@ -228,10 +228,12 @@ const LyricsViewer = memo(function LyricsViewer({
 
       {/* Subtle hint for users */}
       {annotations.length > 0 && (
-        <div className="mt-8 pt-4 border-t border-border">
+        <div className="mt-6 sm:mt-8 pt-4 border-t border-border">
           <p className="text-xs text-muted-foreground text-center">
-            💡 Hover over highlighted text to see annotations, click to view
-            details
+            💡 <span className="hidden sm:inline">Hover over</span>
+            <span className="sm:hidden">Tap</span> highlighted text to see
+            annotations, <span className="hidden sm:inline">click</span>
+            <span className="sm:hidden">tap</span> to view details
           </p>
         </div>
       )}

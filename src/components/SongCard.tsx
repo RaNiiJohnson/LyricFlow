@@ -67,12 +67,12 @@ export function SongCard({ song, className }: SongCardProps) {
           </div>
 
           {/* Song Info */}
-          <div className="p-4 space-y-2">
+          <div className="p-3 sm:p-4 space-y-2">
             <div>
-              <h3 className="font-semibold text-foreground line-clamp-2 group-hover:text-accent-gold transition-colors duration-200">
+              <h3 className="font-semibold text-foreground line-clamp-2 group-hover:text-accent-gold group-active:text-accent-gold transition-colors duration-200 text-sm sm:text-base">
                 {song.title}
               </h3>
-              <p className="text-muted-foreground text-sm line-clamp-1 mt-1">
+              <p className="text-muted-foreground text-xs sm:text-sm line-clamp-1 mt-1">
                 {song.artist}
               </p>
             </div>
@@ -80,10 +80,12 @@ export function SongCard({ song, className }: SongCardProps) {
             {/* Album and Release Date */}
             <div className="flex items-center justify-between text-xs text-muted-foreground">
               {song.album && (
-                <span className="line-clamp-1 flex-1 mr-2">{song.album}</span>
+                <span className="line-clamp-1 flex-1 mr-2 text-xs">
+                  {song.album}
+                </span>
               )}
               {song.releaseDate && (
-                <span className="whitespace-nowrap">
+                <span className="whitespace-nowrap text-xs">
                   {new Date(song.releaseDate).getFullYear()}
                 </span>
               )}
@@ -92,8 +94,8 @@ export function SongCard({ song, className }: SongCardProps) {
             {/* Annotations Count */}
             {song.annotations && song.annotations.length > 0 && (
               <div className="flex items-center space-x-1 text-xs text-accent-gold">
-                <div className="w-2 h-2 bg-accent-gold rounded-full"></div>
-                <span>
+                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-accent-gold rounded-full"></div>
+                <span className="text-xs">
                   {song.annotations.length} annotation
                   {song.annotations.length !== 1 ? "s" : ""}
                 </span>
