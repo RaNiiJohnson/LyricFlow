@@ -19,7 +19,7 @@ export function GenreCard({ genre, className }: GenreCardProps) {
   return (
     <Link href={`/genres/${genre.id}`} className={`block ${className}`}>
       <Card
-        className="genre-card group overflow-hidden bg-card/50 border-border hover:border-accent-gold/50 active:border-accent-gold/70 transition-all duration-300 ease-in-out cursor-pointer touch-manipulation"
+        className="genre-card group overflow-hidden bg-card/50 border-border hover:border-accent/50 active:border-accent/70 transition-all duration-300 ease-in-out cursor-pointer touch-manipulation"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onTouchStart={() => setIsHovered(true)}
@@ -57,14 +57,14 @@ export function GenreCard({ genre, className }: GenreCardProps) {
                 isHovered ? "opacity-100" : "opacity-0"
               }`}
             >
-              <div className="bg-accent-gold/90 rounded-full p-2 sm:p-3 transform transition-transform duration-300 hover:scale-110 active:scale-95">
+              <div className="bg-accent/90 rounded-full p-2 sm:p-3 transform transition-transform duration-300 hover:scale-110 active:scale-95">
                 <TrendingUp className="h-5 w-5 sm:h-6 sm:w-6 text-black" />
               </div>
             </div>
 
             {/* Genre Info Overlay */}
             <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
-              <h3 className="font-bold text-white text-lg sm:text-xl mb-1 group-hover:text-accent-gold transition-colors duration-200">
+              <h3 className="font-bold text-white text-lg sm:text-xl mb-1 group-hover:text-accent transition-colors duration-200">
                 {genre.name}
               </h3>
               <p className="text-white/80 text-xs sm:text-sm line-clamp-2 mb-2">

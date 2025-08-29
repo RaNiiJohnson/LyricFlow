@@ -164,14 +164,14 @@ export default async function GenrePage({ params }: GenrePageProps) {
         {/* Genre Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 sm:mb-12">
           <div className="text-center p-6 bg-card/50 rounded-lg border border-border">
-            <div className="text-3xl font-bold text-accent-gold mb-2">
+            <div className="text-3xl font-bold text-accent mb-2">
               {genre.songCount}
             </div>
             <div className="text-sm text-muted-foreground">Total Songs</div>
           </div>
 
           <div className="text-center p-6 bg-card/50 rounded-lg border border-border">
-            <div className="text-3xl font-bold text-accent-gold mb-2">
+            <div className="text-3xl font-bold text-accent mb-2">
               {genre.popularSongs.length}
             </div>
             <div className="text-sm text-muted-foreground">Popular Tracks</div>
@@ -179,8 +179,8 @@ export default async function GenrePage({ params }: GenrePageProps) {
 
           <div className="text-center p-6 bg-card/50 rounded-lg border border-border">
             <div className="flex items-center justify-center gap-2 mb-2">
-              <Star className="h-6 w-6 text-accent-gold fill-current" />
-              <div className="text-3xl font-bold text-accent-gold">4.8</div>
+              <Star className="h-6 w-6 text-accent fill-current" />
+              <div className="text-3xl font-bold text-accent">4.8</div>
             </div>
             <div className="text-sm text-muted-foreground">Average Rating</div>
           </div>

@@ -173,7 +173,7 @@ export default async function ArtistPage({ params }: ArtistPageProps) {
                   {artist.name}
                 </h1>
                 {artist.verified && (
-                  <CheckCircle className="h-6 w-6 sm:h-8 sm:w-8 text-accent-gold fill-current" />
+                  <CheckCircle className="h-6 w-6 sm:h-8 sm:w-8 text-accent fill-current" />
                 )}
               </div>
 
@@ -203,7 +203,7 @@ export default async function ArtistPage({ params }: ArtistPageProps) {
                   <Badge
                     key={genre}
                     variant="secondary"
-                    className="bg-accent-gold/10 text-accent-gold border-accent-gold/20 hover:bg-accent-gold/20 transition-colors"
+                    className="bg-accent/10 text-accent border-accent/20 hover:bg-accent/20 transition-colors"
                   >
                     {genre}
                   </Badge>
@@ -226,7 +226,7 @@ export default async function ArtistPage({ params }: ArtistPageProps) {
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-muted-foreground hover:text-accent-gold transition-colors"
+                      className="flex items-center gap-2 text-muted-foreground hover:text-accent transition-colors"
                     >
                       <Instagram className="h-4 w-4" />
                       <span className="text-sm">Instagram</span>
@@ -241,7 +241,7 @@ export default async function ArtistPage({ params }: ArtistPageProps) {
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-muted-foreground hover:text-accent-gold transition-colors"
+                      className="flex items-center gap-2 text-muted-foreground hover:text-accent transition-colors"
                     >
                       <Twitter className="h-4 w-4" />
                       <span className="text-sm">Twitter</span>
@@ -256,7 +256,7 @@ export default async function ArtistPage({ params }: ArtistPageProps) {
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-muted-foreground hover:text-accent-gold transition-colors"
+                      className="flex items-center gap-2 text-muted-foreground hover:text-accent transition-colors"
                     >
                       <Youtube className="h-4 w-4" />
                       <span className="text-sm">YouTube</span>

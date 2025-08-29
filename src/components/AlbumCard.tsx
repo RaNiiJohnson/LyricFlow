@@ -30,7 +30,7 @@ export function AlbumCard({ album, className }: AlbumCardProps) {
   return (
     <Link href={`/albums/${album.id}`} className={`block ${className}`}>
       <Card
-        className="album-card group overflow-hidden bg-card/50 border-border hover:border-accent-gold/50 active:border-accent-gold/70 transition-all duration-300 ease-in-out cursor-pointer touch-manipulation"
+        className="album-card group overflow-hidden bg-card/50 border-border hover:border-accent/50 active:border-accent/70 transition-all duration-300 ease-in-out cursor-pointer touch-manipulation"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onTouchStart={() => setIsHovered(true)}
@@ -60,7 +60,7 @@ export function AlbumCard({ album, className }: AlbumCardProps) {
                 isHovered ? "opacity-100" : "opacity-0"
               }`}
             >
-              <div className="bg-accent-gold/90 rounded-full p-2 sm:p-3 transform transition-transform duration-300 hover:scale-110 active:scale-95">
+              <div className="bg-accent/90 rounded-full p-2 sm:p-3 transform transition-transform duration-300 hover:scale-110 active:scale-95">
                 <Play className="h-5 w-5 sm:h-6 sm:w-6 text-black fill-current" />
               </div>
             </div>
@@ -79,7 +79,7 @@ export function AlbumCard({ album, className }: AlbumCardProps) {
           {/* Album Info */}
           <div className="p-3 sm:p-4 space-y-2">
             <div>
-              <h3 className="font-semibold text-foreground line-clamp-2 group-hover:text-accent-gold group-active:text-accent-gold transition-colors duration-200 text-sm sm:text-base">
+              <h3 className="font-semibold text-foreground line-clamp-2 group-hover:text-accent group-active:text-accent transition-colors duration-200 text-sm sm:text-base">
                 {album.title}
               </h3>
               <p className="text-muted-foreground text-xs sm:text-sm line-clamp-1 mt-1">
@@ -101,8 +101,8 @@ export function AlbumCard({ album, className }: AlbumCardProps) {
             </div>
 
             {/* Track Count */}
-            <div className="flex items-center space-x-1 text-xs text-accent-gold">
-              <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-accent-gold rounded-full"></div>
+            <div className="flex items-center space-x-1 text-xs text-accent">
+              <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-accent rounded-full"></div>
               <span className="text-xs">
                 {album.tracks.length} track
                 {album.tracks.length !== 1 ? "s" : ""}

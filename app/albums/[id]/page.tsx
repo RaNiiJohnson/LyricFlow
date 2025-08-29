@@ -63,7 +63,7 @@ async function TrackList({ album }: { album: Album }) {
               href={`/songs/${track.songId}`}
               className="flex items-center gap-4 p-4 sm:p-6 hover:bg-muted/30 transition-colors group"
             >
-              <div className="flex items-center justify-center w-8 h-8 rounded bg-muted text-muted-foreground group-hover:bg-accent-gold group-hover:text-black transition-colors">
+              <div className="flex items-center justify-center w-8 h-8 rounded bg-muted text-muted-foreground group-hover:bg-accent group-hover:text-black transition-colors">
                 <span className="text-sm font-medium group-hover:hidden">
                   {track.trackNumber}
                 </span>
@@ -71,7 +71,7 @@ async function TrackList({ album }: { album: Album }) {
               </div>
 
               <div className="flex-1 min-w-0">
-                <p className="font-medium text-foreground group-hover:text-accent-gold transition-colors truncate">
+                <p className="font-medium text-foreground group-hover:text-accent transition-colors truncate">
                   {track.title}
                 </p>
                 <p className="text-sm text-muted-foreground truncate">
@@ -113,7 +113,7 @@ async function AlbumInfo({ album }: { album: Album }) {
               <p className="text-sm text-muted-foreground">Artist</p>
               <Link
                 href={`/artists/${artist.id}`}
-                className="font-semibold text-foreground hover:text-accent-gold transition-colors"
+                className="font-semibold text-foreground hover:text-accent transition-colors"
               >
                 {artist.name}
               </Link>
@@ -140,14 +140,14 @@ async function AlbumInfo({ album }: { album: Album }) {
         {/* Album Stats */}
         <div className="grid grid-cols-2 gap-4">
           <div className="text-center p-4 bg-card/30 rounded-lg border border-border">
-            <div className="text-2xl font-bold text-accent-gold">
+            <div className="text-2xl font-bold text-accent">
               {album.tracks.length}
             </div>
             <div className="text-sm text-muted-foreground">Tracks</div>
           </div>
           {album.totalDuration && (
             <div className="text-center p-4 bg-card/30 rounded-lg border border-border">
-              <div className="text-2xl font-bold text-accent-gold">
+              <div className="text-2xl font-bold text-accent">
                 {Math.floor(album.totalDuration / 60)}
               </div>
               <div className="text-sm text-muted-foreground">Minutes</div>
@@ -198,7 +198,7 @@ export default async function AlbumPage({ params }: AlbumPageProps) {
               <div className="mb-2">
                 <Badge
                   variant="secondary"
-                  className="bg-accent-gold/10 text-accent-gold border-accent-gold/20"
+                  className="bg-accent/10 text-accent border-accent/20"
                 >
                   <Disc className="h-3 w-3 mr-1" />
                   Album
@@ -212,7 +212,7 @@ export default async function AlbumPage({ params }: AlbumPageProps) {
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 mb-6 text-muted-foreground">
                 <Link
                   href={`/artists/${album.artistId}`}
-                  className="flex items-center gap-2 hover:text-accent-gold transition-colors"
+                  className="flex items-center gap-2 hover:text-accent transition-colors"
                 >
                   <User className="h-4 w-4" />
                   <span className="text-sm sm:text-base font-medium">
@@ -249,7 +249,7 @@ export default async function AlbumPage({ params }: AlbumPageProps) {
               <div className="flex justify-center lg:justify-start mb-6">
                 <Badge
                   variant="secondary"
-                  className="bg-accent-gold/10 text-accent-gold border-accent-gold/20 hover:bg-accent-gold/20 transition-colors"
+                  className="bg-accent/10 text-accent border-accent/20 hover:bg-accent/20 transition-colors"
                 >
                   {album.genre}
                 </Badge>

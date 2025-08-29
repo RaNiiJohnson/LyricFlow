@@ -1,14 +1,57 @@
-export interface Song {
+// export interface Song {
+//   id: string;
+//   title: string;
+//   artist: string;
+//   album?: string;
+//   thumbnailUrl: string;
+//   lyrics: LyricLine[];
+//   annotations: Annotation[];
+//   releaseDate?: string;
+//   genre?: string;
+// }
+
+type Artist = {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  name: string;
+  bio: string | null;
+  imageUrl: string | null;
+  spotifyId: string | null;
+  verified: boolean;
+};
+
+type Album = {
   id: string;
   title: string;
-  artist: string;
-  album?: string;
-  thumbnailUrl: string;
-  lyrics: LyricLine[];
-  annotations: Annotation[];
-  releaseDate?: string;
-  genre?: string;
-}
+  releaseDate: Date | null;
+  createdAt: Date;
+  updatedAt: Date;
+  artistId: string;
+  spotifyId: string | null;
+  coverUrl: string | null;
+} | null;
+
+export type Song = {
+  id: string;
+  title: string;
+  duration: number | null;
+  trackNumber: number | null;
+  thumbnailUrl: string | null;
+  youtubeId: string | null;
+  releaseDate: Date | null;
+  genre: string | null;
+  isExplicit: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  artistId: string;
+  albumId: string | null;
+  artist: Artist;
+  album: Album;
+};
+
+// ton tableau devient :
+const popularSongs: Song[] = [];
 
 export interface LyricLine {
   id: string;

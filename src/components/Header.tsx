@@ -25,26 +25,26 @@ export function Header({ className }: HeaderProps) {
   const [searchResults, setSearchResults] = useState<Song[]>([]);
   const [showResults, setShowResults] = useState(false);
 
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-    if (query.trim()) {
-      const filtered = mockSongs.filter(
-        (song) =>
-          song.title.toLowerCase().includes(query.toLowerCase()) ||
-          song.artist.toLowerCase().includes(query.toLowerCase()) ||
-          song.album?.toLowerCase().includes(query.toLowerCase())
-      );
-      setSearchResults(filtered);
-      setShowResults(true);
-    } else {
-      setSearchResults([]);
-      setShowResults(false);
-    }
-  };
+  // const handleSearch = (query: string) => {
+  //   setSearchQuery(query);
+  //   if (query.trim()) {
+  //     const filtered = mockSongs.filter(
+  //       (song) =>
+  //         song.title.toLowerCase().includes(query.toLowerCase()) ||
+  //         song.artist.toLowerCase().includes(query.toLowerCase()) ||
+  //         song.album?.toLowerCase().includes(query.toLowerCase())
+  //     );
+  //     setSearchResults(filtered);
+  //     setShowResults(true);
+  //   } else {
+  //     setSearchResults([]);
+  //     setShowResults(false);
+  //   }
+  // };
 
   const navigationItems = [
     { href: "/", label: "Home" },
-    { href: "/songs", label: "Lyrics" },
+    { href: "/lyrics", label: "Lyrics" },
     { href: "/artists", label: "Artists" },
     { href: "/albums", label: "Albums" },
     { href: "/genres", label: "Genres" },
@@ -86,16 +86,16 @@ export function Header({ className }: HeaderProps) {
             <Input
               type="text"
               placeholder="Search songs, artists, albums..."
-              value={searchQuery}
-              onChange={(e) => handleSearch(e.target.value)}
-              onFocus={() => searchQuery && setShowResults(true)}
-              onBlur={() => setTimeout(() => setShowResults(false), 200)}
+              // value={searchQuery}
+              // onChange={(e) => handleSearch(e.target.value)}
+              // onFocus={() => searchQuery && setShowResults(true)}
+              // onBlur={() => setTimeout(() => setShowResults(false), 200)}
               className="pl-10 bg-muted/50 border-border focus:border-primary transition-colors"
             />
           </div>
 
           {/* Search Results Dropdown */}
-          {showResults && searchResults.length > 0 && (
+          {/* {showResults && searchResults.length > 0 && (
             <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-md shadow-lg max-h-96 overflow-y-auto z-50">
               {searchResults.slice(0, 5).map((song) => (
                 <Link
@@ -128,7 +128,7 @@ export function Header({ className }: HeaderProps) {
                 </div>
               )}
             </div>
-          )}
+          )} */}
           <ModeToggle />
         </div>
 
@@ -158,13 +158,13 @@ export function Header({ className }: HeaderProps) {
                     type="text"
                     placeholder="Search songs, artists..."
                     value={searchQuery}
-                    onChange={(e) => handleSearch(e.target.value)}
+                    // onChange={(e) => handleSearch(e.target.value)}
                     className="pl-10 bg-muted/50 border-border focus:border-primary transition-colors"
                   />
                 </div>
 
                 {/* Mobile Search Results */}
-                {showResults && searchResults.length > 0 && (
+                {/* {showResults && searchResults.length > 0 && (
                   <div className="mt-4 space-y-2">
                     {searchResults.slice(0, 3).map((song) => (
                       <Link
@@ -185,7 +185,7 @@ export function Header({ className }: HeaderProps) {
                       </Link>
                     ))}
                   </div>
-                )}
+                )} */}
               </div>
 
               {/* Mobile Navigation */}

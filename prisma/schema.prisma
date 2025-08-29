@@ -131,29 +131,48 @@ model Artist {
   name      String
   bio       String?
   imageUrl  String?
+  genres    String[]
   spotifyId String?
+  socialLinks Json? // JSON object with keys like twitter, instagram, facebook
   verified  Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // Relations
   songs  Song[]
   albums Album[]
+  photos ArtistPhoto[]
 
   @@unique([spotifyId])
   @@map("artist")
+}
+
+model ArtistPhoto {
+  id        String   @id @default(cuid())
+  url       String
+  caption   String?
+  width     Int?
+  height    Int?
+  category  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  artistId String
+  artist   Artist @relation(fields: [artistId], references: [id], onDelete: Cascade)
+
+  @@map("artist_photo")
 }
 
 model Album {
   id          String    @id @default(cuid())
   title       String
   coverUrl    String?
+  genre       String?
+  description String?
   releaseDate DateTime?
   spotifyId   String?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 
-  // Relations
   artistId String
   artist   Artist @relation(fields: [artistId], references: [id], onDelete: Cascade)
   songs    Song[]
@@ -175,7 +194,6 @@ model Song {
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
 
-  // Relations
   artistId String
   artist   Artist @relation(fields: [artistId], references: [id], onDelete: Cascade)
 
@@ -201,7 +219,6 @@ model Lyric {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // Relations
   songId String
   song   Song   @relation(fields: [songId], references: [id], onDelete: Cascade)
 
@@ -219,7 +236,6 @@ model Annotation {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
-  // Relations
   songId String
   song   Song   @relation(fields: [songId], references: [id], onDelete: Cascade)
 
@@ -235,7 +251,6 @@ model Playlist {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  // Relations
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -249,7 +264,6 @@ model PlaylistSong {
   order   Int
   addedAt DateTime @default(now())
 
-  // Relations
   playlistId String
   playlist   Playlist @relation(fields: [playlistId], references: [id], onDelete: Cascade)
 
@@ -264,7 +278,6 @@ model UserFavoriteSong {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
 
-  // Relations
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
