@@ -20,6 +20,7 @@ model User {
   email         String
   emailVerified Boolean
   image         String?
+  userType      String?
   createdAt     DateTime
   updatedAt     DateTime
   sessions      Session[]
@@ -127,16 +128,16 @@ model Verification {
 // === LYRICS APPLICATION MODELS ===
 
 model Artist {
-  id        String   @id @default(cuid())
-  name      String
-  bio       String?
-  imageUrl  String?
-  genres    String[]
-  spotifyId String?
+  id          String   @id @default(cuid())
+  name        String
+  bio         String?
+  imageUrl    String?
+  genres      String[]
+  spotifyId   String?
   socialLinks Json? // JSON object with keys like twitter, instagram, facebook
-  verified  Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  verified    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   songs  Song[]
   albums Album[]
