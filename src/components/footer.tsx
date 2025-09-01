@@ -22,7 +22,7 @@ export default function Footer() {
             <div className="flex items-center space-x-2">
               <Music className="h-8 w-8 text-primary" />
               <h3 className="text-2xl font-bold text-foreground">
-                Lyric<span className="text-primary">Flow</span>
+                Lyr<span className="text-primary">X</span>
               </h3>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
@@ -162,7 +162,7 @@ export default function Footer() {
 
         <div className="border-t border-border mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-            © 2025 LyricFlow. All rights reserved.
+            © 2025 LyrX. All rights reserved.
           </p>
           <div className="flex items-center gap-1 text-sm text-muted-foreground">
             <span>Made with</span>

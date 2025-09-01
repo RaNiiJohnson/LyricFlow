@@ -5,6 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { TrendingUp, Music, Clock, Star, Filter } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
+import prisma from "@/lib/prisma";
 
 // Loading component for the song grid
 function SongGridSkeleton() {
@@ -27,8 +28,16 @@ function SongGridSkeleton() {
 // Charts Section Component
 async function ChartsSection() {
   try {
-    const songs = await getPopularSongsAsync();
-    const chartSongs = songs.slice(0, 10);
+    const chartSongs = await prisma.song.findMany({
+      orderBy: {
+        updatedAt: "desc",
+      },
+      include: {
+        artist: true,
+        album: true,
+      },
+      take: 10,
+    });
 
     return (
       <div className="bg-card rounded-lg p-4 sm:p-6 border border-border">
@@ -41,7 +50,7 @@ async function ChartsSection() {
             <Link
               key={song.id}
               href={`/songs/${song.id}`}
-              className="flex items-center gap-4 p-3 rounded-md hover:bg-muted/30 transition-colors group"
+              className="flex items-center gap-4 p-3 rounded-md hover:bg-muted/50 dark:hover:bg-accent/10 transition-colors group"
             >
               <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary font-bold text-sm">
                 {index + 1}
@@ -51,19 +60,13 @@ async function ChartsSection() {
                   {song.title}
                 </p>
                 <p className="text-sm text-muted-foreground truncate">
-                  {song.artist}
+                  {song.artist.name}
                 </p>
               </div>
               <div className="flex flex-col items-end gap-1">
                 <Badge variant="secondary" className="text-xs">
                   {song.genre}
                 </Badge>
-                {song.annotations && song.annotations.length > 0 && (
-                  <div className="flex items-center gap-1 text-xs text-primary">
-                    <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
-                    <span>{song.annotations.length}</span>
-                  </div>
-                )}
               </div>
             </Link>
           ))}
@@ -83,7 +86,15 @@ async function ChartsSection() {
 // Main song grid component - Server Component
 async function AllSongsGrid() {
   try {
-    const allSongs = await getPopularSongsAsync();
+    const allSongs = await prisma.song.findMany({
+      orderBy: {
+        updatedAt: "desc",
+      },
+      include: {
+        artist: true,
+        album: true,
+      },
+    });
 
     if (!allSongs || allSongs.length === 0) {
       return (
@@ -127,46 +138,6 @@ async function AllSongsGrid() {
   }
 }
 
-// Stats Component
-async function SongsStats() {
-  try {
-    const songs = await getPopularSongsAsync();
-    const genres = [...new Set(songs.map((song) => song.genre))];
-    const totalAnnotations = songs.reduce(
-      (total, song) => total + (song.annotations?.length || 0),
-      0
-    );
-
-    return (
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-        <div className="text-center p-6 bg-card/50 rounded-lg border border-border">
-          <div className="text-3xl font-bold text-primary mb-2">
-            {songs.length}
-          </div>
-          <div className="text-sm text-muted-foreground">Song Lyrics</div>
-        </div>
-
-        <div className="text-center p-6 bg-card/50 rounded-lg border border-border">
-          <div className="text-3xl font-bold text-primary mb-2">
-            {genres.length}
-          </div>
-          <div className="text-sm text-muted-foreground">Genres</div>
-        </div>
-
-        <div className="text-center p-6 bg-card/50 rounded-lg border border-border">
-          <div className="text-3xl font-bold text-primary mb-2">
-            {totalAnnotations}
-          </div>
-          <div className="text-sm text-muted-foreground">Annotations</div>
-        </div>
-      </div>
-    );
-  } catch (error) {
-    console.error("Error loading stats:", error);
-    return null;
-  }
-}
-
 export default async function SongsPage() {
   const songs = await getPopularSongsAsync();
 
@@ -183,11 +154,6 @@ export default async function SongsPage() {
           the stories behind your favorite songs from music experts and fans.
         </p>
       </div>
-
-      {/* Stats */}
-      <Suspense fallback={<div className="h-24" />}>
-        <SongsStats />
-      </Suspense>
 
       {/* Main Content */}
       <div className="grid grid-cols-1 xl:grid-cols-4 gap-8 mb-8 sm:mb-12">

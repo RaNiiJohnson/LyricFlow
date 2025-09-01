@@ -10,7 +10,7 @@ export default function SigninPage() {
           <div className="space-y-2">
             <CardTitle className="text-2xl font-bold">Welcome back</CardTitle>
             <p className="text-sm text-muted-foreground">
-              Sign in to your LyricFlow account
+              Sign in to your LyrX account
             </p>
           </div>
         </CardHeader>

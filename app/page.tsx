@@ -1,26 +1,19 @@
-import { Suspense } from "react";
-import { SongCard } from "@/components/SongCard";
 import { ArtistCard } from "@/components/ArtistCard";
 import { GenreCard } from "@/components/GenreCard";
-import { getPopularGenresAsync } from "../data/mockGenres";
-import { Skeleton } from "@/components/ui/skeleton";
-import { TrendingUp, Clock, Star, Music, Heart } from "lucide-react";
-import Link from "next/link";
-import Image from "next/image";
 import {
   ArtistGridSkeleton,
   GenreGridSkeleton,
   SongGridSkeleton,
 } from "@/components/SkeletonLoader";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { SongCard } from "@/components/SongCard";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import prisma from "@/lib/prisma";
+import { Clock, Music, Star, TrendingUp } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { Suspense } from "react";
+import { getPopularGenresAsync } from "../data/mockGenres";
 
 export default async function Home() {
   return (

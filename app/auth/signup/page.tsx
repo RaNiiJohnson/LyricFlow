@@ -13,7 +13,7 @@ export default function SignupPage() {
               Get started free
             </CardTitle>
             <p className="text-sm text-muted-foreground">
-              Create your LyricFlow account in seconds
+              Create your LyrX account in seconds
             </p>
           </div>
         </CardHeader>

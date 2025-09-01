@@ -62,7 +62,7 @@ export function Header({ className }: HeaderProps) {
         >
           <Music className="h-8 w-8 text-primary" />
           <span className="text-xl font-bold text-foreground">
-            Lyric<span className="text-primary">Flow</span>
+            Lyr<span className="text-primary">X</span>
           </span>
         </Link>
 
